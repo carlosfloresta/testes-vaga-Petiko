@@ -11,7 +11,6 @@ O Rank de jogar na liga é calculado utilizando a seguinte lógica:
 2- Se dois jogadores estiverem empatados, o jogador que jogou menos jogos é melhor posicionado.
 3- Se dois jogadores estiverem empatados na pontuação e no número de jogos disputados, então o jogador que foi o primeiro na lista de jogadores é classificado mais alto.
 
-
 Implemente a funação playerRank que retorna o jogador de uma posição escolhida do ranking.
 
 Exemplo:
@@ -23,47 +22,43 @@ $table->recordResult('Arnold', 5);
 $table->recordResult('Chris', 5);
 echo $table->playerRank(1);
 
-
 Todos os jogadores têm a mesma pontuação. No entanto, Arnold e Chris jogaram menos jogos do que Mike, e como Chris está acima de Arnold na lista de jogadores, ele está em primeiro lugar.
 
 Portanto, o código acima deve exibir "Chris".
 
-
-*/
+ */
 
 class LeagueTable
 {
-	public function __construct($players)
+    public function __construct($players)
     {
-		$this->standings = array();
-		foreach($players as $index => $p)
-        {
-			$this->standings[$p] = array
-            (
+        $this->standings = array();
+        foreach ($players as $index => $p) {
+            $this->standings[$p] = array
+                (
                 'index' => $index,
-                'games_played' => 0, 
-                'score' => 0
+                'games_played' => 0,
+                'score' => 0,
             );
         }
-	}
-		
-	public function recordResult($player, $score)
+    }
+
+    public function recordResult($player, $score)
     {
-		$this->standings[$player]['games_played']++;
-		$this->standings[$player]['score'] += $score;
-	}
-	
-	public function playerRank($rank)
+        $this->standings[$player]['games_played']++;
+        $this->standings[$player]['score'] += $score;
+    }
+
+    public function playerRank($rank)
     {
-
-
-            
-
-
-        return 'teste';
-	}
+        $score = array_column($this->standings, 'score');
+        $games_played = array_column($this->standings, 'games_played');
+        array_multisort($score, SORT_DESC, $games_played, SORT_ASC, $this->standings);
+        $jogador = array_keys($this->standings);
+        return $jogador[$rank - 1];
+    }
 }
-      
+
 $table = new LeagueTable(array('Mike', 'Chris', 'Arnold'));
 $table->recordResult('Mike', 2);
 $table->recordResult('Mike', 3);
