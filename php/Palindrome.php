@@ -10,16 +10,18 @@ Faça uma função que ao receber um input de uma palavra, string, verifica se �
 O fato de um caracter ser maiúsculo ou mínusculo não deverá influenciar no resultado da função.
 
 Exemplo: isPalindrome("Asa") deve retonar true.
-*/
-
-
-
+ */
 
 class Palindrome
 {
     public static function isPalindrome($word)
     {
-        return NULL;
+        $word = strtolower($word);
+        $reverse = strrev($word);
+        if ($word === $reverse) {
+            return true;
+        }
+        return false;
     }
 }
 

@@ -55,7 +55,12 @@ class LeagueTable
 	
 	public function playerRank($rank)
     {
-        return NULL;
+
+
+            
+
+
+        return 'teste';
 	}
 }
       

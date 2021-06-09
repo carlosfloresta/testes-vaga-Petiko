@@ -1,6 +1,5 @@
 <?php
-
-
+header("Content-type: text/html; charset=utf-8");
 /* ----------------- DESCRIÇÃO DO TESTE -----------------------*/
 
 /*
@@ -13,37 +12,38 @@ Exemplo:
 
 getAddressByCep('13566400') retorna:
 {
-	"bairro": "Vila Marina",
-	"cidade": "São Carlos",
-	"logradouro": "Rua Francisco Maricondi",
-	"estado_info": {
-	"area_km2": "248.221,996",
-	"codigo_ibge": "35",
-		"nome": "São Paulo"
-	},
-	"cep": "13566400",
-	"cidade_info": {
-		"area_km2": "1136,907",
-		"codigo_ibge": "3548906"
-	},
-	"estado": "SP"
+"bairro": "Vila Marina",
+"cidade": "São Carlos",
+"logradouro": "Rua Francisco Maricondi",
+"estado_info": {
+"area_km2": "248.221,996",
+"codigo_ibge": "35",
+"nome": "São Paulo"
+},
+"cep": "13566400",
+"cidade_info": {
+"area_km2": "1136,907",
+"codigo_ibge": "3548906"
+},
+"estado": "SP"
 }
-
-
 
 Documentação:
 https://postmon.com.br/
 
-
-*/
+ */
 
 class CEP
 {
     public static function getAddressByCep($cep)
     {
-        return NULL;
+        $url = "https://api.postmon.com.br/v1/cep/$cep";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = utf8_decode(curl_exec($ch));
+        curl_close($ch);
+        return $result;
     }
 }
 
-
-var_dump(CEP::getAddressByCep($cep));
+var_dump(CEP::getAddressByCep('13566400'));
