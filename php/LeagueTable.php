@@ -54,8 +54,8 @@ class LeagueTable
         $score = array_column($this->standings, 'score');
         $games_played = array_column($this->standings, 'games_played');
         array_multisort($score, SORT_DESC, $games_played, SORT_ASC, $this->standings);
-        $jogador = array_keys($this->standings);
-        return $jogador[$rank - 1];
+        $player = array_keys($this->standings);
+        return isset($player[$rank - 1]) ? $player[$rank - 1] : false;
     }
 }
 

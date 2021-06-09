@@ -13,11 +13,9 @@ class FileOwners
 {
     public static function groupByOwners($files)
     {
-        $array1 = array_values($files);
-        $array2 = array_keys($files);
         $array = array();
-        foreach ($array1 as $key => $value) {
-            $array[$value][$key] = $array2[$key];
+        foreach (array_values($files) as $key => $value) {
+            $array[$value][$key] = array_keys($files)[$key];
         }
         return $array;
     }

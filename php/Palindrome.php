@@ -18,10 +18,7 @@ class Palindrome
     {
         $word = strtolower($word);
         $reverse = strrev($word);
-        if ($word === $reverse) {
-            return true;
-        }
-        return false;
+        return $word == $reverse ? true : false;
     }
 }
 

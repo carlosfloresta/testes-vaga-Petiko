@@ -10,10 +10,9 @@ function removeProperty(obj, prop) {
     delete obj[prop];
     return true;
   }
-
   return false;
 }
 
-var objeto = { teste: 1, teste2: 2 };
-
+var objeto = new Object();
+objeto.teste = 1;
 console.log(removeProperty(objeto, "teste"));
